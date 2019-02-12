@@ -17,11 +17,11 @@ RUN apt-get install -y nodejs
 # install vim extensions
 RUN git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 COPY vimrc ~/.vimrc
-RUN echo "vim +PluginInstall +qall" > ~/finalize.sh
 
 COPY run.sh /root/run.sh
 
 # set root password
+# this should be variable later
 RUN echo "root:root" | chpasswd
 
 # expose ssh port
