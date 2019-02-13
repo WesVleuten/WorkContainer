@@ -20,9 +20,10 @@ COPY vimrc ~/.vimrc
 
 COPY run.sh /root/run.sh
 
-# set root password
-# this should be variable later
-RUN echo "root:root" | chpasswd
+RUN adduser user --disabled-password -q --gecos "User"
+RUN mkdir -p /home/user/.ssh
+COPY id_rsa.pub /home/user/.ssh/given_id_rsa.pub
+RUN cat /home/user/.ssh/given_id_rsa.pub > /home/user/.ssh/authorized_keys
 
 # expose ssh port
 EXPOSE 22
